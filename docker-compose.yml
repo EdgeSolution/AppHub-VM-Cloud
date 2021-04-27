@@ -1,7 +1,7 @@
 version: '3'
 services:
      androidlink: 
-        image: edgesolution/apphub-manager-base:v1.0.0
+        image: edgesolution/apphub-manager:v1.0.0
         restart: always
         depends_on:
                 - mqtt

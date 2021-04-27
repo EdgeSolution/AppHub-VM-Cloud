@@ -1,0 +1,89 @@
+version: '3'
+services:
+     androidlink: 
+        image: edgesolution/apphub-manager-base:v1.0.0
+        restart: always
+        depends_on:
+                - mqtt
+                - db
+        volumes:
+                - ./java-env/logs:/root/adv/logs
+                - ./java-env/license:/root/adv/license
+                - ./java-env/solutionAppIcon:/root/adv/solutionAppIcon
+                - /sys:/sys
+        ports: 
+                - "8080:8080"
+        command: /root/adv/run.sh
+        container_name: m2mserver
+        networks: 
+                - advnet
+        environment: 
+                - TZ=Asia/Shanghai
+     mqtt:
+        image: edgesolution/apphub-mosquitto:v1.0
+        restart: always
+        ports: 
+                - "1883:1883"
+                - "11880:11880"
+        container_name: m2m_mosquitto
+        networks: 
+              - advnet
+     db:
+        image: postgres:9.4
+        restart: always
+        environment:
+                POSTGRES_PASSWORD: advantech1990
+                POSTGRES_DB: aimlink
+        ports:
+                - "5432:5432"
+        container_name: m2m-postgresSQL
+        networks: 
+              - advnet
+     astore:
+             image: edgesolution/apphub-repo:v1.0.0
+        restart: always
+        depends_on:
+                - db
+        volumes:
+                - ./astore/logs:/root/adv/logs
+                - ./astore/data:/var/www/html/DEPLOYREPO
+        ports:
+                - "30001:30019"
+                - "30002:80"
+        command: /root/adv/run.sh
+        container_name: aimlink_astore
+        networks: 
+                - advnet
+        environment: 
+                - TZ=Asia/Shanghai
+     novnc:
+        image: edgesolution/apphub-novnc:v1.0
+        restart: always
+        volumes:
+                - ./noVnc/log/:/root/adv/log
+        ports:
+                - "9191:9191"
+                - "5901:5901"
+                - "5500:5500"
+        command: /root/adv/run.sh
+        container_name: m2m-novnc
+        networks: 
+                - advnet
+     dockertools:
+        image: portainer/portainer
+        restart: always
+        volumes: 
+                - /var/run/docker.sock:/var/run/docker.sock
+                - ./portainer_data:/data
+        ports: 
+                - "9000:9000"
+        container_name: portainer
+        networks: 
+                - advnet
+networks:
+    advnet:
+        driver: bridge
+        ipam:
+             driver: default
+             config:
+                    - subnet: 172.240.10.0/24

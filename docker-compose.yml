@@ -40,7 +40,7 @@ services:
         networks: 
               - advnet
      astore:
-             image: edgesolution/apphub-repo:v1.0.0
+        image: edgesolution/apphub-repo:v1.0.0
         restart: always
         depends_on:
                 - db

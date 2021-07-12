@@ -72,3 +72,6 @@ http://ServerIP:8080
 SeverIP就是VM对外的公网IP地址。
 
 理论上，上述方法同样适用在各种云平台上安装AppHub，目前我们已经验证适用Azure和阿里云VM。
+| Release version  | DockerHub |    docker tag    |
+| :------------------- | :-------------- | :----------|
+|     V1.0.0         | edgesolution/apphub-manager:v1.0.0<br />edgesolution/apphub-mosquitto:v1.0<br />edgesolution/apphub-novnc:v1.0 | eidevice/androiddm-javaenv-slim-dev:v3.3.9 <br />edgesolution/apphub-mosquitto:v1.0<br />edgesolution/apphub-novnc:v1.5<br /> |

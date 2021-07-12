@@ -1,0 +1,12 @@
+[Unit]
+Description=Update PostgresSQL
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/bin/updatepostgressql
+RestartSec=86400
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sleep 45
+
+/bin/update_postgressql

@@ -7,18 +7,32 @@ services:
                 - mqtt
                 - db
         volumes:
-                - ./java-env/logs:/root/adv/logs
-                - ./java-env/license:/root/adv/license
-                - ./java-env/solutionAppIcon:/root/adv/solutionAppIcon
+                - ./manager/logs:/root/adv/manager/logs
+                - ./manager/license:/root/adv/manager/license
                 - /sys:/sys
-        ports: 
+                - ./repo/logs:/root/adv/repo/logs
+                - ./repo/data:/var/www/html/DEPLOYREPO
+        ports:
                 - "8080:8080"
+                - "8081:8081"
+                - "30001:30019"
+                - "30002:80"
+        environment:
+           TZ: "Asia/Shanghai"
+           POSTGRES_HOST: m2m-postgresSQL
+           POSTGRES_PORT: 5432
+           POSTGRES_USERNAME: postgres
+           POSTGRES_PASSWORD: advantech1990
+           POSTGRES_DBNAME: aimlink
+           datacenter: local
+           subscriptionId: "123"
+           company: "123"
+        env_file: .env
+
         command: /root/adv/run.sh
-        container_name: m2mserver
+        container_name: apphub
         networks: 
                 - advnet
-        environment: 
-                - TZ=Asia/Shanghai
      mqtt:
         image: edgesolution/apphub-mosquitto:v1.0
         restart: always
@@ -39,23 +53,6 @@ services:
         container_name: m2m-postgresSQL
         networks: 
               - advnet
-     astore:
-        image: edgesolution/apphub-repo:v1.0.0
-        restart: always
-        depends_on:
-                - db
-        volumes:
-                - ./astore/logs:/root/adv/logs
-                - ./astore/data:/var/www/html/DEPLOYREPO
-        ports:
-                - "30001:30019"
-                - "30002:80"
-        command: /root/adv/run.sh
-        container_name: aimlink_astore
-        networks: 
-                - advnet
-        environment: 
-                - TZ=Asia/Shanghai
      novnc:
         image: edgesolution/apphub-novnc:v1.0
         restart: always
@@ -65,19 +62,10 @@ services:
                 - "9191:9191"
                 - "5901:5901"
                 - "5500:5500"
+                - "50500-50700:50500-50700"
+                - "8024:8024"
         command: /root/adv/run.sh
-        container_name: m2m-novnc
-        networks: 
-                - advnet
-     dockertools:
-        image: portainer/portainer
-        restart: always
-        volumes: 
-                - /var/run/docker.sock:/var/run/docker.sock
-                - ./portainer_data:/data
-        ports: 
-                - "9000:9000"
-        container_name: portainer
+        container_name: apphub-nat
         networks: 
                 - advnet
 networks:

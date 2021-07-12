@@ -1,10 +1,10 @@
 # Introduction In English(英文说明)
-## 1. buy cloud VM in cloud， for Example, alibaba cloud or microsoft azure
+## 1. Login your Linux Enviroment, Suppoort On-premise Linux server， VM or cloud VM ，for Example, VM on Alibaba cloud or Microsoft zure
 Requirement for AppHub：
 CPU >= 1vCPU
 Memory >= 2G
 Storage >= 20G
-Image: Ubuntu 18.04 64-bit or new
+Image: Ubuntu 18.04 64-bit or new（Other Linux have not test and verification）
 
 ## 2.Open the following port: 
  8080, 30001, 30002, 1883, 5432, 5500, 5901, 9191, 9000 
@@ -36,14 +36,14 @@ http://ServerIP:8080
 
 # 中文说明（Introduction In Chinese）
 
-部署到云端虚拟机步骤
-## 1．	首先需要在平台上上申请一个基于Ubuntu 18.04 x64系统的虚拟机
-我们已经有验证过阿里云和微软Azure云
+部署到Linux主机或者虚拟机步骤
+## 1．	首先需要在搭建一个Linux环境，可以只本地的服务器，虚拟机，或者云平台上申请基于虚拟机，比如阿里云或者微软云上的VM
+我们已经有验证过本地服务器，阿里云和微软Azure云虚拟机，系统是基于Ubuntu 18.04 X64的。建议使用Ubuntu 18.04 X64或以上版本。
 建议配置
 CPU >= 1vCPU
 Memory >= 2G
 Storage >= 20G
-Image: Ubuntu 18.04 64-bit 或者更高版本
+Image: Ubuntu 18.04 64-bit 或者更高版本（其他Linux理论上也可以支持，但未经过验证）
 
 ## 2．	开放如下的端口：
 8080, 30001, 30002, 1883, 5432, 5500, 5901, 9191, 9000
@@ -62,7 +62,7 @@ $ git clone https://github.com/EdgeSolution/AppHub-VM-Cloud.git
 
 
 ## 5．	安装和启动AppHub
-当你通过git下载到安装文件后，ECS会生成“AppHub-VM-Cloud” 目录，进入该目前，执行 start.sh 脚本。
+当你通过git下载到安装文件后，Linux中会生成“AppHub-VM-Cloud” 目录，进入该目前，执行 start.sh 脚本。
 $ cd AppHub-VM-Cloud /              
 $ chmod +x  start.sh                 
 $./start.sh                                          
@@ -71,7 +71,7 @@ start.sh会完成AppHub服务器的安装和启动，因为安装过程是在线
 http://ServerIP:8080
 SeverIP就是VM对外的公网IP地址。
 
-理论上，上述方法同样适用在各种云平台上安装AppHub，目前我们已经验证适用Azure和阿里云VM。
+理论上，上述方法同样适用在各种Linux环境，甚至在云平台VM中安装AppHub，目前我们已经验证适用Azure和阿里云VM。
 | Release version  | DockerHub |    docker tag    |
 | :------------------- | :-------------- | :----------|
 |     V1.0.0         | edgesolution/apphub-manager:v1.0.0<br />edgesolution/apphub-mosquitto:v1.0<br />edgesolution/apphub-novnc:v1.0 | eidevice/androiddm-javaenv-slim-dev:v3.3.9 <br />edgesolution/apphub-mosquitto:v1.0<br />edgesolution/apphub-novnc:v1.5<br /> |

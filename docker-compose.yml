@@ -54,7 +54,7 @@ services:
         networks: 
               - advnet
      novnc:
-        image: edgesolution/apphub-novnc:v1.0
+        image: edgesolution/apphub-novnc:v1.0-rc.1
         restart: always
         volumes:
                 - ./noVnc/log/:/root/adv/log

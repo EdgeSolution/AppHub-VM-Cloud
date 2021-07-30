@@ -1,7 +1,7 @@
 version: '3'
 services:
      androidlink: 
-        image: edgesolution/apphub-manager:v1.0.1-rc.1
+        image: edgesolution/apphub-manager:v1.0.1
         restart: always
         depends_on:
                 - mqtt
@@ -15,8 +15,7 @@ services:
         ports:
                 - "8080:8080"
                 - "8081:8081"
-                - "30001:30019"
-                - "30002:80"
+                - "30001:30001"
         environment:
            TZ: "Asia/Shanghai"
            POSTGRES_HOST: m2m-postgresSQL
@@ -54,7 +53,7 @@ services:
         networks: 
               - advnet
      novnc:
-        image: edgesolution/apphub-novnc:v1.0-rc.1
+        image: edgesolution/apphub-novnc:v1.1
         restart: always
         volumes:
                 - ./noVnc/log/:/root/adv/log
@@ -67,6 +66,18 @@ services:
         command: /root/adv/run.sh
         container_name: apphub-nat
         networks: 
+                - advnet
+     minio:
+        image: minio/minio:latest
+        restart: always
+        environment:
+               MINIO_ACCESS_KEY: admin
+               MINIO_SECRET_KEY: admin123456
+        ports:
+                - "9000:9000"
+        command: server /data
+        container_name: minio
+        networks:
                 - advnet
 networks:
     advnet:

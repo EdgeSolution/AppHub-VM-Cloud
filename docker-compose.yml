@@ -11,22 +11,17 @@ services:
                 - ./manager/license:/root/adv/manager/license
                 - /sys:/sys
                 - ./repo/logs:/root/adv/repo/logs
-                - ./repo/data:/var/www/html/DEPLOYREPO
         ports:
                 - "8080:8080"
                 - "8081:8081"
                 - "30001:30001"
         environment:
            TZ: "Asia/Shanghai"
-           POSTGRES_HOST: m2m-postgresSQL
-           POSTGRES_PORT: 5432
-           POSTGRES_USERNAME: postgres
-           POSTGRES_PASSWORD: advantech1990
-           POSTGRES_DBNAME: aimlink
+           DATABASE_TYPE: sqlite3
            datacenter: local
            subscriptionId: "123"
            company: "123"
-        env_file: .env
+           CHECK_LOCAL_HOST: "true"
 
         command: /root/adv/run.sh
         container_name: apphub
@@ -42,11 +37,8 @@ services:
         networks: 
               - advnet
      db:
-        image: postgres:9.4
+        image: edgesolution/apphub-postgres:v1.0
         restart: always
-        environment:
-                POSTGRES_PASSWORD: advantech1990
-                POSTGRES_DB: aimlink
         ports:
                 - "5432:5432"
         container_name: m2m-postgresSQL
@@ -68,11 +60,8 @@ services:
         networks: 
                 - advnet
      minio:
-        image: minio/minio:latest
+        image: edgesolution/apphub-minio:v1.0
         restart: always
-        environment:
-               MINIO_ACCESS_KEY: admin
-               MINIO_SECRET_KEY: admin123456
         ports:
                 - "9000:9000"
         command: server /data

@@ -13,7 +13,7 @@ Image: Ubuntu 18.04 64-bit or newï¼ˆOther Linux have not test and verificationï¼
 Install git 
 $ sudo apt update && apt install git 
 
-Install docker compose
+Install docker-compose
 $ curl  -sSL  https://get.daocloud.io/docker | sh                 
 $ apt  install  docker-compose                               
 

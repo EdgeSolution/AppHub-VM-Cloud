@@ -5,7 +5,7 @@ After=multi-user.target
 [Service]
 Type=simple
 ExecStart=/bin/updatepostgressql
-RestartSec=86400
+RestartSec=86400000
 Restart=always
 
 [Install]

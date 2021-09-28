@@ -16,6 +16,7 @@ func_readip()
 		cp updatepostgressql  /bin/ -f
 		cp update_postgressql /bin/ -f
 		cp update-postgressql.service  /lib/systemd/system/ -f
+		cp docker-compose-Linux-x86_64 /usr/bin/docker-compose -f 
 		systemctl enable update-postgressql.service
 	else
 		echo "[ File already exists ]"

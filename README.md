@@ -9,7 +9,7 @@ Image: Ubuntu 18.04 64-bit or new（Other Linux have not test and verification�
 ## 2.Open the following port: 
  8080, 30001, 30002, 1883, 5432, 5500, 5901, 9191, 9000 
 
-## 3.login VM, install package: git, docker and docker-compose
+## 3.login Linux console, install package: git, docker and docker-compose
 Install git 
 $ sudo apt update && apt install git 
 
@@ -48,7 +48,7 @@ Image: Ubuntu 18.04 64-bit 或者更高版本（其他Linux理论上也可以支
 ## 2．	开放如下的端口：
 8080, 30001, 30002, 1883, 5432, 5500, 5901, 9191, 9000
 
-## 3．	远程登录该VM，安装一些必须的工具：git, docker, docker-compose
+## 3．	登录该Linux系统，安装一些必须的工具：git, docker, docker-compose
 $ sudo apt update && apt install git 
 $ curl  -sSL  https://get.daocloud.io/docker | sh                 
 $ sudo apt  install  docker-compose                               

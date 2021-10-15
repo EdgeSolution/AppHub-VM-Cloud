@@ -9,7 +9,7 @@ Image: Ubuntu 18.04 64-bit or new（Other Linux have not test and verification�
 ## 2.Open the following port: 
  8080, 30001, 30002, 1883, 5432, 5500, 5901, 9191, 9000 
 
-## 3.login Linux console, install package: git, docker and docker-compose
+## 3.login VM, install package: git, docker and docker-compose
 Install git 
 $ sudo apt update && apt install git 
 
@@ -48,7 +48,7 @@ Image: Ubuntu 18.04 64-bit 或者更高版本（其他Linux理论上也可以支
 ## 2．	开放如下的端口：
 8080, 30001, 30002, 1883, 5432, 5500, 5901, 9191, 9000
 
-## 3．	登录该Linux系统，安装一些必须的工具：git, docker, docker-compose
+## 3．	远程登录该VM，安装一些必须的工具：git, docker, docker-compose
 $ sudo apt update && apt install git 
 $ curl  -sSL  https://get.daocloud.io/docker | sh                 
 $ sudo apt  install  docker-compose                               
@@ -74,4 +74,4 @@ SeverIP就是VM对外的公网IP地址。
 理论上，上述方法同样适用在各种Linux环境，甚至在云平台VM中安装AppHub，目前我们已经验证适用Azure和阿里云VM。
 | Release version  | DockerHub |    docker tag    |
 | :------------------- | :-------------- | :----------|
-|     V1.0.2         | edgesolution/apphub-manager:v1.0.2<br />edgesolution/apphub-mosquitto:v1.0<br />edgesolution/apphub-novnc:v1.1<br />edgesolution/apphub-postgres:v1.0<br />edgesolution/apphub-minio:v1.0 | eidevice/androiddm-javaenv-slim-dev:v4.3.3 <br />edgesolution/apphub-mosquitto:v1.0<br />edgesolution/apphub-novnc:v1.5<br />eidevice/androiddm-postgres-dev:v1.1<br />eidevice/androiddm-minio-dev:v1.1<br /> |
+|     V1.0.2         | edgesolution/apphub-manager:v1.0.2<br />edgesolution/apphub-mosquitto:v1.0<br />edgesolution/apphub-novnc:v1.1<br />edgesolution/apphub-postgres:v1.0<br />edgesolution/apphub-minio:v1.0 | eidevice/androiddm-javaenv-slim-dev:v4.4.6 <br />edgesolution/apphub-mosquitto:v1.0<br />edgesolution/apphub-novnc:v1.5<br />eidevice/androiddm-postgres-dev:v1.1<br />eidevice/androiddm-minio-dev:v1.1<br /> |

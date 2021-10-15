@@ -1,0 +1,10 @@
+[Unit]
+Description=Start network interface hot plug at startup
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/bin/ethhotplug
+
+[Install]
+WantedBy=multi-user.target

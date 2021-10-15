@@ -12,12 +12,16 @@ func_readip()
 	if [ ! -x /bin/updatepostgressql ];then
 		echo "[ Copy file ... ]"
 		dpkg -i libpq5_10.17-0ubuntu0.18.04.1_amd64.deb
-		chmod 777 updatepostgressql update_postgressql
+		chmod 777 updatepostgressql update_postgressql ethhotplug eth_hotplug
 		cp updatepostgressql  /bin/ -f
 		cp update_postgressql /bin/ -f
+		cp ethhotplug   /bin/ -f
+		cp eth_hotplug  /bin/ -f
 		cp update-postgressql.service  /lib/systemd/system/ -f
+		cp work-eth-hotplug.service  /lib/systemd/system/ -f
 		cp docker-compose-Linux-x86_64 /usr/bin/docker-compose -f 
 		systemctl enable update-postgressql.service
+		systemctl enable work-eth-hotplug.service
 	else
 		echo "[ File already exists ]"
 	fi

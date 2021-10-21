@@ -31,6 +31,9 @@ sync
 func_startdocker()
 {
 	docker-compose -f docker-compose.yml up -d
+	sleep 15
+	systemctl restart update-postgressql.service
+	systemctl restart work-eth-hotplug.service
 }
 
 func_downloadgit()

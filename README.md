@@ -1,5 +1,5 @@
 # Introduction In English(英文说明)
-## 1. Login your Linux Enviroment, Suppoort On-premise Linux server， VM or cloud VM ，for Example, VM on Alibaba cloud or Microsoft zure
+## 1. Login your Linux Enviroment, Suppoort On-premise Linux server， VM or cloud VM ，for Example, VM on Alibaba cloud or Microsoft Azure
 Requirement for AppHub：
 CPU >= 1vCPU
 Memory >= 2G

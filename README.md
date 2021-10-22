@@ -1,5 +1,6 @@
 # Introduction In English(英文说明)
-## 1. Login your Linux Enviroment, Suppoort On-premise Linux server， VM or cloud VM ，for Example, VM on Alibaba cloud or Microsoft Azure
+Deploy to On-premise Linux server，local VM or cloud VM SOP
+## 1. Login your Linux Enviroment, Support On-premise Linux server， VM or cloud VM ，for Example, VM on Alibaba cloud or Microsoft Azure
 Requirement for AppHub：
 CPU >= 1vCPU
 Memory >= 2G
@@ -30,7 +31,7 @@ $ cd AppHub-VM-Cloud /
 $ chmod +x  start.sh                 
 $./start.sh   
 
-it will download AppHub docker image from docker hub, may be 10 ~ 20 minute, please wait it complete. 
+it will download AppHub docker image from docker hub, may be 10 ~ 20 minutes, please wait it to complete. 
 After finished, you can access AppHub Server in browser as follows:
 http://ServerIP:8080
 

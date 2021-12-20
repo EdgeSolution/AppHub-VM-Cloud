@@ -1,7 +1,7 @@
 version: '3'
 services:
      androidlink: 
-        image: edgesolution/apphub-manager:v1.0.3-beta.1
+        image: edgesolution/apphub-manager:v1.0.3
         restart: always
         depends_on:
                 - mqtt
@@ -22,17 +22,20 @@ services:
            subscriptionId: "123"
            company: "123"
            CHECK_LOCAL_HOST: "true"
-
+        env_file:
+                - ./.env
         command: /root/adv/run.sh
         container_name: apphub
         networks: 
                 - advnet
      mqtt:
-        image: edgesolution/apphub-mosquitto:v1.0
+        image: edgesolution/apphub-emqx:v1.0
         restart: always
         ports: 
                 - "1883:1883"
-                - "11880:11880"
+                - "18083:18083"
+        env_file:
+                - ./.env
         container_name: m2m_mosquitto
         networks: 
               - advnet
@@ -49,11 +52,13 @@ services:
                 - "shared_buffers=1024MB"
                 - "-c"
                 - "work_mem=131072"
+        env_file:
+                - ./.env
         container_name: m2m-postgresSQL
         networks: 
               - advnet
      novnc:
-        image: edgesolution/apphub-novnc:v1.1
+        image: edgesolution/apphub-novnc:v1.2
         restart: always
         volumes:
                 - ./noVnc/log/:/root/adv/log

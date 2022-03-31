@@ -19,6 +19,7 @@ func_randompasswd()
 		/bin/random_string |grep POSTGRES_PASSWORD >> .env
 		/bin/random_string |grep MQTT_PASSWORD >> .env
 		echo "CUSTOM_FLAG=1" >> .env
+		cp .env   /bin/ -f 
 		return 0
 	else
 		#echo "flag=$flag"

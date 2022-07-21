@@ -74,4 +74,4 @@ SeverIP就是VM对外的公网IP地址。
 理论上，上述方法同样适用在各种Linux环境，甚至在云平台VM中安装AppHub，目前我们已经验证适用Azure和阿里云VM。
 | Release version  | DockerHub |    docker tag    |
 | :------------------- | :-------------- | :----------|
-|     V1.0.4        | edgesolution/apphub-manager:v1.0.4<br />edgesolution/apphub-emqx:v1.0<br />edgesolution/apphub-novnc:v1.2<br />edgesolution/apphub-postgres:v1.0<br />edgesolution/apphub-minio:v1.0 | eidevice/androiddm-javaenv-slim-dev:v5.2.9-release<br />eidevice/apphub-emqx-dev:v1.0.9<br />eidevice/apphub-novnc-dev:v1.0.0<br />eidevice/androiddm-postgres-dev:v1.1<br />eidevice/androiddm-minio-dev:v1.1<br /> |
+|     V1.0.4        | edgesolution/apphub-manager:v1.0.4<br />edgesolution/apphub-emqx:v1.1<br />edgesolution/apphub-novnc:v1.2<br />edgesolution/apphub-postgres:v1.0<br />edgesolution/apphub-minio:v1.0 | eidevice/androiddm-javaenv-slim-dev:v5.3.0-release<br />eidevice/apphub-emqx-dev:v1.1.0<br />eidevice/apphub-novnc-dev:v1.0.0<br />eidevice/androiddm-postgres-dev:v1.1<br />eidevice/androiddm-minio-dev:v1.1<br /> |

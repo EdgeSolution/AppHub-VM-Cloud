@@ -31,7 +31,7 @@ func_readip()
 {
 	if [ ! -x /bin/updatepostgressql ];then
 		echo "[ Copy file ... ]"
-		dpkg -i libpq5_10.17-0ubuntu0.18.04.1_amd64.deb
+		dpkg -i libpq5*.deb
 		chmod 777 updatepostgressql update_postgressql ethhotplug eth_hotplug
 		cp updatepostgressql  /bin/ -f
 		cp update_postgressql /bin/ -f
@@ -64,7 +64,7 @@ func_downloadgit()
 ######### Main ############
 func_randompasswd
 if [ $? -ne 0 ];then
-	echo "The custom flag has been modified and the service is running."
+	echo "The Apphub server is running."
 	exit 1
 fi
 func_readip

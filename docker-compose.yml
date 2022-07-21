@@ -14,6 +14,7 @@ services:
         ports:
                 - "8080:8080"
                 - "8081:8081"
+                - "8082:8082"
                 - "30001:30001"
         environment:
            TZ: "Asia/Shanghai"
@@ -29,7 +30,7 @@ services:
         networks: 
                 - advnet
      mqtt:
-        image: edgesolution/apphub-emqx:v1.0
+        image: edgesolution/apphub-emqx:v1.1
         restart: always
         ports: 
                 - "1883:1883"

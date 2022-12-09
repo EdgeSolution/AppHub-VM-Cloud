@@ -1,7 +1,7 @@
 version: '3'
 services:
      androidlink: 
-        image: edgesolution/apphub-manager:v1.0.4
+        image: edgesolution/apphub-manager:v2.0.0
         restart: always
         depends_on:
                 - mqtt
@@ -14,7 +14,6 @@ services:
         ports:
                 - "8080:8080"
                 - "8081:8081"
-                - "8082:8082"
                 - "30001:30001"
         environment:
            TZ: "Asia/Shanghai"
@@ -29,12 +28,34 @@ services:
         container_name: apphub
         networks: 
                 - advnet
+     ithing:
+        image: edgesolution/apphub-ithings:v1.0
+        restart: always
+        depends_on:
+                - mqtt
+                - db
+                - influxDB
+                - androidlink
+        volumes:
+                - ./ithings/logs:/root/adv/ithings/logs
+        ports:
+                - "8082:8082"
+        environment:
+           LOG_PATH: "/root/adv/ithings/logs/ithings.log"
+           TZ: "Asia/Shanghai"
+        env_file:
+                - ./.env
+        command: /root/adv/run.sh
+        container_name: ithing
+        networks:
+                - advnet
      mqtt:
-        image: edgesolution/apphub-emqx:v1.1
+        image: edgesolution/apphub-emqx:v1.2
         restart: always
         ports: 
                 - "1883:1883"
                 - "18083:18083"
+                - "8083:8083"
         env_file:
                 - ./.env
         container_name: m2m_mosquitto
@@ -80,6 +101,18 @@ services:
                 - "9000:9000"
         command: server /data
         container_name: minio
+        networks:
+                - advnet
+     influxDB:
+        image: edgesolution/apphub-influxdb:v1.0
+        restart: always
+        ports:
+                - "8086:8086"
+        volumes:
+                - ./influxdb:/var/lib/influxdb
+        env_file:
+                - ./.env
+        container_name: m2m-influxdb
         networks:
                 - advnet
 networks:

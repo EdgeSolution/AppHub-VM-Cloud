@@ -51,7 +51,7 @@ func_readip()
 func_startdocker()
 {
 	docker-compose -f ./docker-compose.yml up -d
-	sleep 20
+	sleep 25
 	systemctl restart update-postgressql.service
 	systemctl restart work-eth-hotplug.service
 }

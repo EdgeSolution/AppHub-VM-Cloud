@@ -1,13 +1,14 @@
 version: '3'
 services:
      androidlink: 
-        image: edgesolution/apphub-manager:v2.0.1
+        image: edgesolution/apphub-manager:v2.1.0
         restart: always
         depends_on:
                 - mqtt
                 - db
         volumes:
                 - ./manager/logs:/root/adv/manager/logs
+                - ./manager/sql:/root/adv/manager/sql
                 - ./license:/root/adv/license
                 - /sys:/sys
                 - ./repo/logs:/root/adv/repo/logs
@@ -29,7 +30,7 @@ services:
         networks: 
                 - advnet
      ithing:
-        image: edgesolution/apphub-ithings:v1.1
+        image: edgesolution/apphub-ithings:v1.2
         restart: always
         depends_on:
                 - mqtt
@@ -99,6 +100,8 @@ services:
         restart: always
         ports:
                 - "9000:9000"
+        volumes:
+                - ./minio/data:/data
         command: server /data
         container_name: minio
         networks:

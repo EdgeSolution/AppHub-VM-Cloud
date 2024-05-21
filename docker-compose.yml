@@ -1,7 +1,7 @@
 version: '3'
 services:
      androidlink: 
-        image: edgesolution/apphub-manager:v2.1.0
+        image: edgesolution/apphub-manager:v2.2.0
         restart: always
         depends_on:
                 - mqtt
@@ -30,7 +30,7 @@ services:
         networks: 
                 - advnet
      ithing:
-        image: edgesolution/apphub-ithings:v1.2
+        image: edgesolution/apphub-ithings:v1.3
         restart: always
         depends_on:
                 - mqtt
@@ -107,7 +107,7 @@ services:
         networks:
                 - advnet
      influxDB:
-        image: edgesolution/apphub-influxdb:v1.0
+        image: edgesolution/apphub-influxdb:v1.1
         restart: always
         ports:
                 - "8086:8086"

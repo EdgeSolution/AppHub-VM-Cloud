@@ -61,6 +61,29 @@ func_downloadgit()
 	git pull
 }
 
+func_broadcast()
+{
+	echo "[INFO]Confirm systemctl status"
+	systemdFlag=`systemctl --version`
+	if [ -z "$systemdFlag" ]
+	then
+        	echo ""
+        	echo "[ERROR]The systemctl is not supported"
+        	echo "[ERROR]Please manual config for auto start broadcast when system boot to support wake system when shutdown"
+        	echo ""
+		
+	else
+	        echo "[INFO]The systemctl is supported"
+		cp broadcast /bin/ -f
+		cp AppHub-Broadcast.service /lib/systemd/system/ -f
+		systemctl daemon-reload
+		systemctl enable AppHub-Broadcast.service
+		systemctl restart AppHub-Broadcast.service
+
+	fi
+	
+}
+
 ######### Main ############
 func_randompasswd
 if [ $? -ne 0 ];then
@@ -69,4 +92,5 @@ if [ $? -ne 0 ];then
 fi
 func_readip
 func_startdocker
+func_broadcast
 echo "success"

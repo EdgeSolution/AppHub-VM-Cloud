@@ -1,0 +1,12 @@
+[Unit]
+Description=broadcast to wake device at shutdown
+After=multi-user.target network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/broadcast
+RestartSec=20
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

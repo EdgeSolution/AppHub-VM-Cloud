@@ -1,7 +1,7 @@
 version: '3'
 services:
      androidlink: 
-        image: edgesolution/apphub-manager:v2.2.0
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-manager:v2.3.0
         restart: always
         depends_on:
                 - mqtt
@@ -30,7 +30,7 @@ services:
         networks: 
                 - advnet
      ithing:
-        image: edgesolution/apphub-ithings:v1.3
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-ithings:v1.4
         restart: always
         depends_on:
                 - mqtt
@@ -51,7 +51,7 @@ services:
         networks:
                 - advnet
      mqtt:
-        image: edgesolution/apphub-emqx:v1.2
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-emqx:v1.2
         restart: always
         ports: 
                 - "1883:1883"
@@ -63,7 +63,7 @@ services:
         networks: 
               - advnet
      db:
-        image: edgesolution/apphub-postgres:v1.0
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-postgres:v1.1
         restart: always
         ports:
                 - "5432:5432"
@@ -81,7 +81,7 @@ services:
         networks: 
               - advnet
      novnc:
-        image: edgesolution/apphub-novnc:v1.2
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-novnc:v1.2
         restart: always
         volumes:
                 - ./noVnc/log/:/root/adv/log
@@ -89,25 +89,25 @@ services:
                 - "9191:9191"
                 - "5901:5901"
                 - "5500:5500"
-                - "50500-50700:50500-50700"
+                - "50500-50520:50500-50520"
                 - "8024:8024"
         command: /root/adv/run.sh
         container_name: apphub-nat
         networks: 
                 - advnet
      minio:
-        image: edgesolution/apphub-minio:v1.0
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-minio:v1.1
         restart: always
         ports:
                 - "9000:9000"
         volumes:
                 - ./minio/data:/data
-        command: server /data
+        command: /root/adv/run.sh
         container_name: minio
         networks:
                 - advnet
      influxDB:
-        image: edgesolution/apphub-influxdb:v1.1
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-influxdb:v1.2
         restart: always
         ports:
                 - "8086:8086"

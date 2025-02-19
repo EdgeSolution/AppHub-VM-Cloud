@@ -1,17 +1,17 @@
 version: '3'
 services:
      androidlink: 
-        image: harbor.arfa.wise-paas.com/edgesolution/apphub-manager:v2.3.0
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-manager:v2.4.0
         restart: always
         depends_on:
                 - mqtt
                 - db
         volumes:
-                - ./manager/logs:/root/adv/manager/logs
-                - ./manager/sql:/root/adv/manager/sql
-                - ./license:/root/adv/license
+                - ./logs/manager:/root/adv/manager/logs
+                - ./data/license:/root/adv/license
                 - /sys:/sys
-                - ./repo/logs:/root/adv/repo/logs
+                - ./logs/repo:/root/adv/repo/logs
+
         ports:
                 - "8080:8080"
                 - "8081:8081"
@@ -23,6 +23,13 @@ services:
            subscriptionId: "123"
            company: "123"
            CHECK_LOCAL_HOST: "true"
+        logging:
+           driver: json-file
+           options:
+              max-size: "1m"  # 限制每个日志文件为10MB
+        dns:
+                - 8.8.8.8
+                - 114.114.114.114
         env_file:
                 - ./.env
         command: /root/adv/run.sh
@@ -30,7 +37,7 @@ services:
         networks: 
                 - advnet
      ithing:
-        image: harbor.arfa.wise-paas.com/edgesolution/apphub-ithings:v1.4
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-ithings:v1.5
         restart: always
         depends_on:
                 - mqtt
@@ -38,7 +45,7 @@ services:
                 - influxDB
                 - androidlink
         volumes:
-                - ./ithings/logs:/root/adv/ithings/logs
+                - ./logs/ithings:/root/adv/ithings/logs
         ports:
                 - "8082:8082"
         environment:
@@ -50,6 +57,10 @@ services:
         container_name: ithing
         networks:
                 - advnet
+        logging:
+           driver: json-file
+           options:
+              max-size: "10k"
      mqtt:
         image: harbor.arfa.wise-paas.com/edgesolution/apphub-emqx:v1.2
         restart: always
@@ -62,8 +73,12 @@ services:
         container_name: m2m_mosquitto
         networks: 
               - advnet
+        logging:
+           driver: json-file
+           options:
+              max-size: "10k"
      db:
-        image: harbor.arfa.wise-paas.com/edgesolution/apphub-postgres:v1.1
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-postgres:v1.2
         restart: always
         ports:
                 - "5432:5432"
@@ -77,14 +92,20 @@ services:
                 - "work_mem=131072"
         env_file:
                 - ./.env
+        volumes:
+                - ./data/postgresql/data:/var/lib/postgresql/data
         container_name: m2m-postgresSQL
         networks: 
               - advnet
+        logging:
+           driver: json-file
+           options:
+              max-size: "10k"
      novnc:
         image: harbor.arfa.wise-paas.com/edgesolution/apphub-novnc:v1.2
         restart: always
         volumes:
-                - ./noVnc/log/:/root/adv/log
+                - ./logs/noVnc:/root/adv/log
         ports:
                 - "9191:9191"
                 - "5901:5901"
@@ -95,29 +116,41 @@ services:
         container_name: apphub-nat
         networks: 
                 - advnet
+        logging:
+           driver: json-file
+           options:
+              max-size: "10k"
      minio:
         image: harbor.arfa.wise-paas.com/edgesolution/apphub-minio:v1.1
         restart: always
         ports:
                 - "9000:9000"
         volumes:
-                - ./minio/data:/data
+                - ./data/minio:/data
         command: /root/adv/run.sh
         container_name: minio
         networks:
                 - advnet
+        logging:
+           driver: json-file
+           options:
+              max-size: "10k"
      influxDB:
         image: harbor.arfa.wise-paas.com/edgesolution/apphub-influxdb:v1.2
         restart: always
         ports:
                 - "8086:8086"
         volumes:
-                - ./influxdb:/var/lib/influxdb
+                - ./data/influxdb:/var/lib/influxdb
         env_file:
                 - ./.env
         container_name: m2m-influxdb
         networks:
                 - advnet
+        logging:
+           driver: json-file
+           options:
+              max-size: "10k"
 networks:
     advnet:
         driver: bridge

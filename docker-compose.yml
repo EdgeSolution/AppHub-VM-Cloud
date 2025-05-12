@@ -1,7 +1,7 @@
 version: '3'
 services:
      androidlink: 
-        image: harbor.arfa.wise-paas.com/edgesolution/apphub-manager:v2.4.0
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-manager:v3.0.0
         restart: always
         depends_on:
                 - mqtt
@@ -37,7 +37,7 @@ services:
         networks: 
                 - advnet
      ithing:
-        image: harbor.arfa.wise-paas.com/edgesolution/apphub-ithings:v1.5
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-ithings:v1.6
         restart: always
         depends_on:
                 - mqtt
@@ -102,7 +102,7 @@ services:
            options:
               max-size: "10k"
      novnc:
-        image: harbor.arfa.wise-paas.com/edgesolution/apphub-novnc:v1.2
+        image: harbor.arfa.wise-paas.com/edgesolution/apphub-novnc:v1.3
         restart: always
         volumes:
                 - ./logs/noVnc:/root/adv/log
@@ -110,8 +110,9 @@ services:
                 - "9191:9191"
                 - "5901:5901"
                 - "5500:5500"
-                - "50500-50520:50500-50520"
+                - "50500-50510:50500-50510"
                 - "8024:8024"
+                - "1000:8180"
         command: /root/adv/run.sh
         container_name: apphub-nat
         networks: 
